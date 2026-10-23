@@ -1,0 +1,8 @@
+<article class="review" itemprop="review" itemscope itemtype="https://schema.org/Review">
+  <header class="review__header">
+    <p class="review__author" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><%= review.author %></span></p>
+    <p class="review__rating" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating"><meta itemprop="bestRating" content="5"><span itemprop="ratingValue"><%= review.rating %></span> / 5</p>
+    <time class="review__date" datetime="<%= review.date %>" itemprop="datePublished"><%= review.dateLabel %></time>
+  </header>
+  <p class="review__text" itemprop="reviewBody"><%= review.text %></p>
+</article>

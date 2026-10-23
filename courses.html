@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('src/partials/head', { title: 'Courses', description: 'Browse all Codeline Academy courses by category, level and price.' }) %>
+</head>
+<body>
+<%- include('src/partials/header', { active: 'courses' }) %>
+<main id="main" class="main">
+  <section class="page-intro" aria-labelledby="page-title">
+    <div class="container">
+      <%- include('src/partials/breadcrumbs', { trail: [{ label: 'Home', href: './index.html' }, { label: 'Courses' }] }) %>
+      <h1 class="page-intro__title" id="page-title">Courses</h1>
+      <p class="page-intro__text">Eight programs across programming, web development, data and DevOps.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Course catalog">
+    <div class="container catalog">
+      <aside class="catalog__filters" aria-label="Course filters">
+        <form class="filters" action="./courses.html" method="get">
+          <div class="field">
+            <label class="field__label" for="search">Search</label>
+            <input class="field__input" id="search" name="search" type="search" placeholder="Search courses">
+          </div>
+          <fieldset class="filters__group">
+            <legend class="filters__legend">Category</legend>
+            <% categories.forEach(function (c, i) { %>
+            <label class="check"><input class="check__input" type="checkbox" name="category-<%= c.toLowerCase().replace(/ /g, "-") %>" value="<%= c %>"> <%= c %></label>
+            <% }); %>
+          </fieldset>
+          <fieldset class="filters__group">
+            <legend class="filters__legend">Level</legend>
+            <label class="check"><input class="check__input" type="radio" name="level" value="all" checked> All levels</label>
+            <label class="check"><input class="check__input" type="radio" name="level" value="beginner"> Beginner</label>
+            <label class="check"><input class="check__input" type="radio" name="level" value="intermediate"> Intermediate</label>
+          </fieldset>
+          <div class="field">
+            <label class="field__label" for="sort">Sort by</label>
+            <select class="field__input" id="sort" name="sort">
+              <option value="popular">Most popular</option>
+              <option value="price">Price, low to high</option>
+              <option value="rating">Rating</option>
+            </select>
+          </div>
+          <button class="button button--primary" type="submit">Apply filters</button>
+        </form>
+      </aside>
+
+      <div class="catalog__results">
+        <p class="catalog__count">Showing <%= courses.length %> of <%= courses.length %> courses</p>
+        <div class="grid grid--cards">
+          <% courses.forEach(function (course) { %>
+          <%- include('src/partials/course-card', { course: course }) %>
+          <% }); %>
+        </div>
+        <nav class="pagination" aria-label="Pagination">
+          <ul class="pagination__list">
+            <li><a class="pagination__link" href="./courses.html" aria-label="Previous page">&lsaquo;</a></li>
+            <li><a class="pagination__link pagination__link--current" href="./courses.html" aria-current="page">1</a></li>
+            <li><a class="pagination__link" href="./courses.html">2</a></li>
+            <li><a class="pagination__link" href="./courses.html" aria-label="Next page">&rsaquo;</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+</main>
+<%- include('src/partials/footer') %>
+</body>
+</html>

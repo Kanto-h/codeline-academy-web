@@ -1,0 +1,19 @@
+<footer class="footer">
+  <div class="footer__inner container">
+    <section class="footer__about" aria-label="About the academy">
+      <p class="footer__brand"><%= site.name %></p>
+      <p class="footer__text"><%= site.tagline %></p>
+    </section>
+    <% site.footerColumns.forEach(function (col) { %>
+    <nav class="footer__column" aria-label="<%= col.title %>">
+      <h2 class="footer__title"><%= col.title %></h2>
+      <ul class="footer__list">
+        <% col.links.forEach(function (link) { %>
+        <li class="footer__item"><a class="footer__link" href="<%= link.href %>"><%= link.label %></a></li>
+        <% }); %>
+      </ul>
+    </nav>
+    <% }); %>
+  </div>
+  <p class="footer__copy container">&copy; 2026 <%= site.name %>. All rights reserved.</p>
+</footer>

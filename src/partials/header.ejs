@@ -1,0 +1,19 @@
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="header">
+  <div class="header__inner container">
+    <a class="header__brand brand" href="./index.html" aria-label="<%= site.name %> home">
+      <span class="brand__mark" aria-hidden="true">&lt;/&gt;</span>
+      <span class="brand__name"><%= site.name %></span>
+    </a>
+    <nav class="header__nav nav" aria-label="Main navigation">
+      <ul class="nav__list">
+        <% site.nav.forEach(function (item) { %>
+        <li class="nav__item">
+          <a class="nav__link<%= active === item.key ? ' nav__link--active' : '' %>" href="<%= item.href %>"<%- active === item.key ? ' aria-current="page"' : '' %>><%= item.label %></a>
+        </li>
+        <% }); %>
+      </ul>
+    </nav>
+    <a class="button button--primary header__cta" href="./enrollment.html">Enroll now</a>
+  </div>
+</header>

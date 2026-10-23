@@ -1,0 +1,10 @@
+<article class="course-card" itemscope itemtype="https://schema.org/Course">
+  <%- include('picture', { cls: 'course-card__media', image: course.image, alt: course.alt, sizes: '(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw' }) %>
+  <div class="course-card__body">
+    <p class="course-card__category" itemprop="about"><%= course.category %></p>
+    <h3 class="course-card__title"><a class="course-card__link" href="./course-details.html" itemprop="url"><span itemprop="name"><%= course.title %></span></a></h3>
+    <p class="course-card__meta"><span itemprop="educationalLevel"><%= course.level %></span> &middot; <%= course.weeks %> weeks &middot; <%= course.rating %> rating</p>
+    <p class="course-card__provider" itemprop="provider" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="<%= site.name %>"></p>
+    <p class="course-card__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer"><meta itemprop="priceCurrency" content="EUR"><span itemprop="price" content="<%= course.price %>"><%= priceLabel(course.price) %></span></p>
+  </div>
+</article>

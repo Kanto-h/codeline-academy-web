@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('src/partials/head', { title: 'Enrollment', description: 'Reserve a place in a Codeline Academy course.' }) %>
+</head>
+<body>
+<%- include('src/partials/header', { active: 'enrollment' }) %>
+<main id="main" class="main">
+  <section class="page-intro" aria-labelledby="page-title">
+    <div class="container">
+      <%- include('src/partials/breadcrumbs', { trail: [{ label: 'Home', href: './index.html' }, { label: featuredCourse.title, href: './course-details.html' }, { label: 'Enrollment' }] }) %>
+      <h1 class="page-intro__title" id="page-title">Enrollment</h1>
+      <p class="page-intro__text">Fill in your details to reserve a place. You will receive a confirmation by email.</p>
+    </div>
+  </section>
+
+  <div class="container enroll">
+    <aside class="enroll__summary" aria-label="Order summary">
+      <%- include('src/partials/picture', { cls: 'enroll__media', image: featuredCourse.image, alt: featuredCourse.alt, sizes: '(min-width: 1280px) 30vw, 100vw' }) %>
+      <p class="enroll__category"><%= featuredCourse.category %></p>
+      <h2 class="enroll__title"><%= featuredCourse.title %></h2>
+      <p class="enroll__meta"><%= featuredCourse.level %> &middot; <%= featuredCourse.weeks %> weeks &middot; <%= featuredCourse.instructor %></p>
+      <table class="table table--compact">
+        <caption class="visually-hidden">Price summary</caption>
+        <tbody>
+          <tr><th scope="row">Course price</th><td><%= priceLabel(featuredCourse.price) %></td></tr>
+          <tr><th scope="row">Total</th><td><strong><%= priceLabel(featuredCourse.price) %></strong></td></tr>
+        </tbody>
+      </table>
+    </aside>
+
+    <form class="form" action="./enrollment.html" method="post">
+      <fieldset class="form__group">
+        <legend class="form__legend">Your details</legend>
+        <div class="field">
+          <label class="field__label" for="full-name">Full name</label>
+          <input class="field__input" id="full-name" name="fullName" type="text" placeholder="Anna Weber" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label class="field__label" for="email">Email address</label>
+          <input class="field__input" id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label class="field__label" for="country">Country</label>
+          <select class="field__input" id="country" name="country" required>
+            <option value="">Select country</option>
+            <option value="de">Germany</option>
+            <option value="ua">Ukraine</option>
+            <option value="ie">Ireland</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="phone">Phone (optional)</label>
+          <input class="field__input" id="phone" name="phone" type="tel" placeholder="+49 000 000000" autocomplete="tel">
+        </div>
+      </fieldset>
+
+      <fieldset class="form__group">
+        <legend class="form__legend">Course start</legend>
+        <div class="field">
+          <label class="field__label" for="start">Start date</label>
+          <select class="field__input" id="start" name="start">
+            <option value="next">Next available</option>
+            <option value="month">First Monday of next month</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="pace">Weekly time</label>
+          <select class="field__input" id="pace" name="pace">
+            <option value="5">5 hours per week</option>
+            <option value="10">10 hours per week</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <label class="check form__terms"><input class="check__input" type="checkbox" name="terms" required> I agree to the course terms and the privacy policy.</label>
+
+      <div class="form__actions">
+        <button class="button button--primary" type="submit">Confirm enrollment</button>
+        <a class="button button--secondary" href="./course-details.html">Back to course</a>
+      </div>
+    </form>
+  </div>
+</main>
+<%- include('src/partials/footer') %>
+</body>
+</html>

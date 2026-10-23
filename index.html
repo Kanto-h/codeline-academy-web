@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('src/partials/head', { title: 'Online IT courses', description: 'Structured online IT courses in programming, web development, data, DevOps and security.' }) %>
+</head>
+<body>
+<%- include('src/partials/header', { active: 'home' }) %>
+<main id="main" class="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__inner container">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Online IT courses</p>
+        <h1 class="hero__title" id="hero-title">Learn IT skills with a clear plan</h1>
+        <p class="hero__text">Structured programs, practical assignments and feedback from working engineers.</p>
+        <p class="hero__actions">
+          <a class="button button--primary" href="./courses.html">Browse courses</a>
+          <a class="button button--secondary" href="./enrollment.html">Enroll now</a>
+        </p>
+      </div>
+      <%- include('src/partials/picture', { cls: 'hero__media', image: 'hero', alt: 'Abstract code symbols on a blue background', sizes: '(min-width: 1280px) 40vw, 100vw' }) %>
+    </div>
+  </section>
+
+  <section class="section section--surface" aria-labelledby="categories-title">
+    <div class="container">
+      <h2 class="section__title" id="categories-title">Course categories</h2>
+      <ul class="tags">
+        <% categories.forEach(function (c) { %>
+        <li class="tags__item"><a class="tag" href="./courses.html"><%= c %></a></li>
+        <% }); %>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="popular-title">
+    <div class="container">
+      <header class="section__header">
+        <h2 class="section__title" id="popular-title">Popular courses</h2>
+        <a class="section__link" href="./courses.html">View all courses</a>
+      </header>
+      <div class="grid grid--cards">
+        <% courses.slice(0, 4).forEach(function (course) { %>
+        <%- include('src/partials/course-card', { course: course }) %>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface" id="instructors" aria-labelledby="instructors-title">
+    <div class="container">
+      <h2 class="section__title" id="instructors-title">Our instructors</h2>
+      <div class="grid grid--three">
+        <% instructors.forEach(function (person) { %>
+        <article class="person" itemscope itemtype="https://schema.org/Person">
+          <h3 class="person__name" itemprop="name"><%= person.name %></h3>
+          <p class="person__role" itemprop="jobTitle"><%= person.role %></p>
+          <p class="person__bio" itemprop="description"><%= person.bio %></p>
+        </article>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="reviews-title">
+    <div class="container">
+      <h2 class="section__title" id="reviews-title">What students say</h2>
+      <div class="grid grid--three">
+        <% reviews.forEach(function (review) { %>
+        <div itemscope itemtype="https://schema.org/Course">
+          <meta itemprop="name" content="<%= featuredCourse.title %>">
+          <%- include('src/partials/review-card', { review: review }) %>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+</main>
+<%- include('src/partials/footer') %>
+</body>
+</html>

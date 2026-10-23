@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include('src/partials/head', { title: featuredCourse.title, description: 'React from Scratch: a 12-week intermediate course with Marcus Lindqvist.' }) %>
+</head>
+<body>
+<%- include('src/partials/header', { active: 'details' }) %>
+<main id="main" class="main">
+  <article itemscope itemtype="https://schema.org/Course">
+    <section class="page-intro" aria-labelledby="course-title">
+      <div class="container">
+        <%- include('src/partials/breadcrumbs', { trail: [{ label: 'Home', href: './index.html' }, { label: 'Courses', href: './courses.html' }, { label: featuredCourse.title }] }) %>
+        <p class="page-intro__eyebrow" itemprop="about"><%= featuredCourse.category %></p>
+        <h1 class="page-intro__title" id="course-title" itemprop="name"><%= featuredCourse.title %></h1>
+        <p class="page-intro__text" itemprop="description">Build modern interfaces with components, state and hooks, and finish with a real project.</p>
+        <p class="page-intro__meta">
+          <span itemprop="educationalLevel"><%= featuredCourse.level %></span> &middot;
+          <%= featuredCourse.weeks %> weeks &middot;
+          Instructor: <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><%= featuredCourse.instructor %></span></span>
+        </p>
+        <meta itemprop="provider" content="<%= site.name %>">
+      </div>
+    </section>
+
+    <div class="container details">
+      <div class="details__main">
+        <%- include('src/partials/picture', { cls: 'details__media', image: featuredCourse.image, alt: featuredCourse.alt, sizes: '(min-width: 1280px) 60vw, 100vw' }) %>
+
+        <section class="section section--flush" aria-labelledby="program-title">
+          <h2 class="section__title" id="program-title">Course program</h2>
+          <table class="table">
+            <caption class="table__caption">Modules of <%= featuredCourse.title %></caption>
+            <thead>
+              <tr><th scope="col">Module</th><th scope="col">Lessons</th><th scope="col">Hours</th></tr>
+            </thead>
+            <tbody>
+              <% modules.forEach(function (m) { %>
+              <tr><th scope="row"><%= m.title %></th><td><%= m.lessons %></td><td><%= m.hours %></td></tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section section--flush" aria-labelledby="reviews-title">
+          <h2 class="section__title" id="reviews-title">Student reviews</h2>
+          <p class="rating-summary" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+            Rating <span itemprop="ratingValue"><%= featuredCourse.rating %></span> from <span itemprop="reviewCount"><%= reviews.length %></span> reviews
+          </p>
+          <div class="stack">
+            <% reviews.forEach(function (review) { %>
+            <%- include('src/partials/review-card', { review: review }) %>
+            <% }); %>
+          </div>
+        </section>
+      </div>
+
+      <aside class="details__aside" aria-label="Course summary">
+        <div class="summary" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+          <p class="summary__price"><meta itemprop="priceCurrency" content="EUR"><span itemprop="price" content="<%= featuredCourse.price %>"><%= priceLabel(featuredCourse.price) %></span></p>
+          <ul class="summary__list">
+            <li>Duration: <%= featuredCourse.weeks %> weeks</li>
+            <li>Level: <%= featuredCourse.level %></li>
+            <li>Certificate of completion</li>
+          </ul>
+          <a class="button button--primary summary__button" href="./enrollment.html">Enroll now</a>
+          <a class="button button--secondary summary__button" href="./courses.html">Back to courses</a>
+        </div>
+      </aside>
+    </div>
+  </article>
+</main>
+<%- include('src/partials/footer') %>
+</body>
+</html>
