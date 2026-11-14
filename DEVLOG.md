@@ -12,7 +12,8 @@ Keep short weekly notes:
 - Plan: Lab 3 adds SCSS styles from the Figma layout.
 
 ## Week 2
--
+- Simplified the Figma design (6 colors, one font family, fewer sections) and rebuilt the 4 pages to match it.
+- Shared parts are EJS partials: header, footer, button, course card, picture.
 
 ## Week 3
 -

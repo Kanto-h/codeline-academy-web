@@ -1,68 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<%- include('src/partials/head', { title: 'Courses', description: 'Browse all Codeline Academy courses by category, level and price.' }) %>
+<%- include('src/partials/head', { title: 'Courses', description: 'All Codeline courses by category.' }) %>
 </head>
 <body>
 <%- include('src/partials/header', { active: 'courses' }) %>
-<main id="main" class="main">
-  <section class="page-intro" aria-labelledby="page-title">
-    <div class="container">
-      <%- include('src/partials/breadcrumbs', { trail: [{ label: 'Home', href: './index.html' }, { label: 'Courses' }] }) %>
-      <h1 class="page-intro__title" id="page-title">Courses</h1>
-      <p class="page-intro__text">Eight programs across programming, web development, data and DevOps.</p>
-    </div>
+<main class="main" id="main">
+  <section class="hero" aria-labelledby="page-title">
+    <h1 class="hero__title" id="page-title">Courses</h1>
+    <p class="hero__text">Choose a course from the list below.</p>
   </section>
 
-  <section class="section" aria-label="Course catalog">
-    <div class="container catalog">
-      <aside class="catalog__filters" aria-label="Course filters">
-        <form class="filters" action="./courses.html" method="get">
-          <div class="field">
-            <label class="field__label" for="search">Search</label>
-            <input class="field__input" id="search" name="search" type="search" placeholder="Search courses">
-          </div>
-          <fieldset class="filters__group">
-            <legend class="filters__legend">Category</legend>
-            <% categories.forEach(function (c, i) { %>
-            <label class="check"><input class="check__input" type="checkbox" name="category-<%= c.toLowerCase().replace(/ /g, "-") %>" value="<%= c %>"> <%= c %></label>
-            <% }); %>
-          </fieldset>
-          <fieldset class="filters__group">
-            <legend class="filters__legend">Level</legend>
-            <label class="check"><input class="check__input" type="radio" name="level" value="all" checked> All levels</label>
-            <label class="check"><input class="check__input" type="radio" name="level" value="beginner"> Beginner</label>
-            <label class="check"><input class="check__input" type="radio" name="level" value="intermediate"> Intermediate</label>
-          </fieldset>
-          <div class="field">
-            <label class="field__label" for="sort">Sort by</label>
-            <select class="field__input" id="sort" name="sort">
-              <option value="popular">Most popular</option>
-              <option value="price">Price, low to high</option>
-              <option value="rating">Rating</option>
-            </select>
-          </div>
-          <button class="button button--primary" type="submit">Apply filters</button>
-        </form>
-      </aside>
+  <section class="filters" aria-label="Search and filters">
+    <form class="filters__search" action="./courses.html" method="get" role="search">
+      <label class="visually-hidden" for="search">Search courses</label>
+      <input class="input" id="search" name="search" type="search" placeholder="Search courses...">
+      <button class="filters__submit visually-hidden" type="submit">Search</button>
+    </form>
+    <ul class="chips" aria-label="Categories">
+      <% categories.forEach(function (c, i) { %>
+      <li class="chips__item"><button class="chip<%= i === 0 ? ' chip--active' : '' %>" type="button"<%- i === 0 ? ' aria-pressed="true"' : ' aria-pressed="false"' %>><%= c %></button></li>
+      <% }); %>
+    </ul>
+  </section>
 
-      <div class="catalog__results">
-        <p class="catalog__count">Showing <%= courses.length %> of <%= courses.length %> courses</p>
-        <div class="grid grid--cards">
-          <% courses.forEach(function (course) { %>
-          <%- include('src/partials/course-card', { course: course }) %>
-          <% }); %>
-        </div>
-        <nav class="pagination" aria-label="Pagination">
-          <ul class="pagination__list">
-            <li><a class="pagination__link" href="./courses.html" aria-label="Previous page">&lsaquo;</a></li>
-            <li><a class="pagination__link pagination__link--current" href="./courses.html" aria-current="page">1</a></li>
-            <li><a class="pagination__link" href="./courses.html">2</a></li>
-            <li><a class="pagination__link" href="./courses.html" aria-label="Next page">&rsaquo;</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
+  <section class="cards" aria-label="Course list">
+    <% courses.forEach(function (course) { %>
+    <%- include('src/partials/course-card', { course: course }) %>
+    <% }); %>
   </section>
 </main>
 <%- include('src/partials/footer') %>
