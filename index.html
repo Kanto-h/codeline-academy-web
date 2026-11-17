@@ -6,14 +6,17 @@
 <body>
 <%- include('src/partials/header', { active: 'home' }) %>
 <main class="main" id="main">
-  <section class="hero" aria-labelledby="hero-title">
-    <h1 class="hero__title" id="hero-title">Learn IT skills online</h1>
-    <p class="hero__text">Short courses with practical tasks. Start at any time.</p>
-    <%- include('src/partials/button', { href: './courses.html', label: 'View courses' }) %>
+  <section class="hero hero--with-media" aria-labelledby="hero-title">
+    <div class="hero__content">
+      <h1 class="hero__title" id="hero-title" data-i18n="home.title"><%= t('home.title') %></h1>
+      <p class="hero__text" data-i18n="home.text"><%= t('home.text') %></p>
+      <%- include('src/partials/button', { href: './courses.html', key: 'btn.viewCourses' }) %>
+    </div>
+    <%- include('src/partials/picture', { cls: 'hero__media', image: 'hero', alt: t('home.heroAlt'), altKey: 'home.heroAlt', height: 720, eager: true, noProp: true, sizes: '(min-width: 1280px) 480px, 100vw' }) %>
   </section>
 
   <section class="section" aria-labelledby="popular-title">
-    <h2 class="section__title" id="popular-title">Popular courses</h2>
+    <h2 class="section__title" id="popular-title" data-i18n="home.popular"><%= t('home.popular') %></h2>
     <div class="cards">
       <% courses.slice(0, 3).forEach(function (course) { %>
       <%- include('src/partials/course-card', { course: course }) %>

@@ -1,18 +1,23 @@
-<a class="skip-link" href="#main">Skip to main content</a>
+<a class="skip-link" href="#main" data-i18n="skip"><%= t('skip') %></a>
 <header class="header">
   <a class="header__logo" href="./index.html"><%= site.name %></a>
-  <button class="header__menu" type="button" aria-label="Open menu" aria-controls="main-nav" aria-expanded="false">
+  <button class="header__menu" type="button" aria-label="<%= t('menu.open') %>" data-i18n-aria-label="menu.open" aria-controls="main-nav" aria-expanded="false">
     <span class="header__menu-line"></span>
     <span class="header__menu-line"></span>
     <span class="header__menu-line"></span>
   </button>
-  <nav class="header__nav nav" id="main-nav" aria-label="Main navigation">
+  <nav class="header__nav nav" id="main-nav" aria-label="<%= t('nav.label') %>" data-i18n-aria-label="nav.label">
     <ul class="nav__list">
       <% site.nav.forEach(function (item) { %>
       <li class="nav__item">
-        <a class="nav__link<%= active === item.key ? ' nav__link--active' : '' %>" href="<%= item.href %>"<%- active === item.key ? ' aria-current="page"' : '' %>><%= item.label %></a>
+        <a class="nav__link<%= active === item.key ? ' nav__link--active' : '' %>" href="<%= item.href %>" data-i18n="nav.<%= item.key %>"<%- active === item.key ? ' aria-current="page"' : '' %>><%= t('nav.' + item.key) %></a>
       </li>
       <% }); %>
     </ul>
   </nav>
+  <div class="header__lang lang" role="group" aria-label="<%= t('lang.label') %>" data-i18n-aria-label="lang.label">
+    <% site.languages.forEach(function (lang) { %>
+    <button class="lang__button" type="button" data-lang="<%= lang %>" aria-pressed="<%= lang === 'en' ? 'true' : 'false' %>"><%= lang.toUpperCase() %></button>
+    <% }); %>
+  </div>
 </header>

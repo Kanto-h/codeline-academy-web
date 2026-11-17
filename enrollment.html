@@ -7,28 +7,28 @@
 <%- include('src/partials/header', { active: 'enrollment' }) %>
 <main class="main" id="main">
   <section class="hero" aria-labelledby="page-title">
-    <h1 class="hero__title" id="page-title">Enrollment</h1>
-    <p class="hero__text">Fill in the form to reserve a place.</p>
+    <h1 class="hero__title" id="page-title" data-i18n="enroll.title"><%= t('enroll.title') %></h1>
+    <p class="hero__text" data-i18n="enroll.text"><%= t('enroll.text') %></p>
   </section>
 
   <form class="form" action="./enrollment.html" method="post" aria-labelledby="page-title">
     <div class="form__field">
-      <label class="form__label" for="full-name">Full name</label>
-      <input class="input" id="full-name" name="fullName" type="text" placeholder="Anna Weber" autocomplete="name" required>
+      <label class="form__label" for="full-name" data-i18n="enroll.name"><%= t('enroll.name') %></label>
+      <input class="input" id="full-name" name="fullName" type="text" placeholder="<%= t('enroll.namePlaceholder') %>" data-i18n-placeholder="enroll.namePlaceholder" autocomplete="name" required>
     </div>
     <div class="form__field">
-      <label class="form__label" for="email">Email</label>
-      <input class="input" id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
+      <label class="form__label" for="email" data-i18n="enroll.email"><%= t('enroll.email') %></label>
+      <input class="input" id="email" name="email" type="email" placeholder="<%= t('enroll.emailPlaceholder') %>" data-i18n-placeholder="enroll.emailPlaceholder" autocomplete="email" required>
     </div>
     <div class="form__field">
-      <label class="form__label" for="course">Course</label>
+      <label class="form__label" for="course" data-i18n="enroll.course"><%= t('enroll.course') %></label>
       <select class="input" id="course" name="course" required>
         <% courses.forEach(function (course) { %>
         <option value="<%= course.title %>"<%- course.title === featured.title ? ' selected' : '' %>><%= course.title %></option>
         <% }); %>
       </select>
     </div>
-    <button class="button button--primary" type="submit">Confirm enrollment</button>
+    <button class="button button--primary" type="submit" data-i18n="btn.confirm"><%= t('btn.confirm') %></button>
   </form>
 </main>
 <%- include('src/partials/footer') %>

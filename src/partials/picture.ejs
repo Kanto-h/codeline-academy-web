@@ -1,4 +1,4 @@
 <picture class="<%= cls %>">
   <source type="image/webp" srcset="./src/assets/images/<%= image %>-480.webp 480w, ./src/assets/images/<%= image %>-960.webp 960w" sizes="<%= sizes %>">
-  <img class="<%= cls %>-img" src="./src/assets/images/<%= image %>-960.jpg" alt="<%= alt %>" width="960" height="540" loading="lazy">
+  <img class="<%= cls %>-img" src="./src/assets/images/<%= image %>-960.jpg" alt="<%= alt %>"<% if (typeof altKey !== 'undefined') { %> data-i18n-alt="<%= altKey %>"<% } %> width="960" height="<%= typeof height !== 'undefined' ? height : 540 %>"<%- typeof eager !== 'undefined' && eager ? '' : ' loading="lazy"' %><%- typeof noProp !== "undefined" && noProp ? "" : " itemprop=\"image\"" %>>
 </picture>

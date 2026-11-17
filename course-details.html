@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<%- include('src/partials/head', { title: featured.title, description: featured.description }) %>
+<%- include('src/partials/head', { title: featured.title, description: t('details.description') }) %>
 </head>
 <body>
 <%- include('src/partials/header', { active: 'courses' }) %>
 <main class="main" id="main">
   <article class="course" itemscope itemtype="https://schema.org/Course">
     <header class="hero">
-      <p class="hero__category" itemprop="about"><%= featured.category %></p>
+      <p class="hero__category" itemprop="about" data-i18n="cat.<%= featured.category %>"><%= t('cat.' + featured.category) %></p>
       <h1 class="hero__title" itemprop="name"><%= featured.title %></h1>
-      <p class="hero__text" itemprop="description"><%= featured.description %></p>
+      <p class="hero__text" itemprop="description" data-i18n="details.description"><%= t('details.description') %></p>
       <meta itemprop="provider" content="<%= site.name %>">
     </header>
 
-    <%- include('src/partials/picture', { cls: 'course__media', image: featured.image, alt: featured.alt, sizes: '(min-width: 1280px) 1120px, 100vw' }) %>
+    <%- include('src/partials/picture', { cls: 'course__media', image: featured.image, alt: coverAlt(featured), eager: true, sizes: '(min-width: 1280px) 1120px, 100vw' }) %>
 
     <dl class="facts">
       <div class="facts__item">
-        <dt class="facts__label">Level</dt>
-        <dd class="facts__value" itemprop="educationalLevel"><%= featured.level %></dd>
+        <dt class="facts__label" data-i18n="details.level"><%= t('details.level') %></dt>
+        <dd class="facts__value" itemprop="educationalLevel" data-i18n="level.<%= featured.level %>"><%= t('level.' + featured.level) %></dd>
       </div>
       <div class="facts__item">
-        <dt class="facts__label">Duration</dt>
-        <dd class="facts__value"><%= featured.weeks %> weeks</dd>
+        <dt class="facts__label" data-i18n="details.duration"><%= t('details.duration') %></dt>
+        <dd class="facts__value"><%= featured.weeks %> <span data-i18n="unit.weeks"><%= t('unit.weeks') %></span></dd>
       </div>
       <div class="facts__item" itemprop="instructor" itemscope itemtype="https://schema.org/Person">
-        <dt class="facts__label">Instructor</dt>
+        <dt class="facts__label" data-i18n="details.instructor"><%= t('details.instructor') %></dt>
         <dd class="facts__value" itemprop="name"><%= featured.instructor %></dd>
       </div>
       <div class="facts__item" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-        <dt class="facts__label">Price</dt>
+        <dt class="facts__label" data-i18n="details.price"><%= t('details.price') %></dt>
         <dd class="facts__value"><meta itemprop="priceCurrency" content="EUR"><span itemprop="price" content="<%= featured.price %>"><%= priceLabel(featured.price) %></span></dd>
       </div>
     </dl>
 
     <section class="program" aria-labelledby="program-title">
-      <h2 class="program__title" id="program-title">Course program</h2>
+      <h2 class="program__title" id="program-title" data-i18n="details.program"><%= t('details.program') %></h2>
       <table class="program__table">
-        <caption class="visually-hidden">Modules and their duration</caption>
+        <caption class="visually-hidden" data-i18n="details.programCaption"><%= t('details.programCaption') %></caption>
         <thead class="visually-hidden">
-          <tr><th scope="col">Module</th><th scope="col">Duration</th></tr>
+          <tr><th scope="col" data-i18n="details.module"><%= t('details.module') %></th><th scope="col" data-i18n="details.duration"><%= t('details.duration') %></th></tr>
         </thead>
         <tbody>
           <% featured.modules.forEach(function (m) { %>
-          <tr class="program__row"><th class="program__module" scope="row"><%= m.title %></th><td class="program__duration"><%= m.weeks %> weeks</td></tr>
+          <tr class="program__row"><th class="program__module" scope="row" data-i18n="<%= m.key %>"><%= t(m.key) %></th><td class="program__duration"><%= m.weeks %> <span data-i18n="unit.weeks"><%= t('unit.weeks') %></span></td></tr>
           <% }); %>
         </tbody>
       </table>
     </section>
 
-    <%- include('src/partials/button', { href: './enrollment.html', label: 'Enroll now' }) %>
+    <%- include('src/partials/button', { href: './enrollment.html', key: 'btn.enroll' }) %>
   </article>
 </main>
 <%- include('src/partials/footer') %>

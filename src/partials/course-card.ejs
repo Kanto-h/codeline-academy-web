@@ -1,11 +1,14 @@
 <article class="course-card" itemscope itemtype="https://schema.org/Course">
-  <p class="course-card__category" itemprop="about"><%= course.category %></p>
-  <h3 class="course-card__title" itemprop="name"><%= course.title %></h3>
-  <p class="course-card__meta"><span itemprop="educationalLevel"><%= course.level %></span> &middot; <%= course.weeks %> weeks</p>
-  <p class="course-card__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-    <meta itemprop="priceCurrency" content="EUR">
-    <span itemprop="price" content="<%= course.price %>"><%= priceLabel(course.price) %></span>
-  </p>
-  <meta itemprop="provider" content="<%= site.name %>">
-  <%- include('button', { href: './course-details.html', label: 'View course' }) %>
+  <%- include('picture', { cls: 'course-card__media', image: course.image, alt: coverAlt(course), sizes: '(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw' }) %>
+  <div class="course-card__body">
+    <p class="course-card__category" itemprop="about" data-i18n="cat.<%= course.category %>"><%= t('cat.' + course.category) %></p>
+    <h3 class="course-card__title" itemprop="name"><%= course.title %></h3>
+    <p class="course-card__meta"><span itemprop="educationalLevel" data-i18n="level.<%= course.level %>"><%= t('level.' + course.level) %></span> &middot; <%= course.weeks %> <span data-i18n="unit.weeks"><%= t('unit.weeks') %></span></p>
+    <p class="course-card__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+      <meta itemprop="priceCurrency" content="EUR">
+      <span itemprop="price" content="<%= course.price %>"><%= priceLabel(course.price) %></span>
+    </p>
+    <meta itemprop="provider" content="<%= site.name %>">
+    <%- include('button', { href: './course-details.html', key: 'btn.viewCourse' }) %>
+  </div>
 </article>

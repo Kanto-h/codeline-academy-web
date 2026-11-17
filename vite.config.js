@@ -2,13 +2,14 @@ import { defineConfig } from "vite";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import ejsPlugin from "./tools/vite-plugin-ejs.js";
-import * as data from "./src/data/site.js";
+import * as site from "./src/data/site.js";
+import * as i18n from "./src/data/i18n.js";
 
 const root = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   base: "./",
-  plugins: [ejsPlugin(data)],
+  plugins: [ejsPlugin({ ...site, ...i18n })],
   server: { port: 5173, open: true },
   preview: { port: 4173 },
   root: ".",

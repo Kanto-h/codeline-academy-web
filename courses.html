@@ -7,24 +7,24 @@
 <%- include('src/partials/header', { active: 'courses' }) %>
 <main class="main" id="main">
   <section class="hero" aria-labelledby="page-title">
-    <h1 class="hero__title" id="page-title">Courses</h1>
-    <p class="hero__text">Choose a course from the list below.</p>
+    <h1 class="hero__title" id="page-title" data-i18n="courses.title"><%= t('courses.title') %></h1>
+    <p class="hero__text" data-i18n="courses.text"><%= t('courses.text') %></p>
   </section>
 
-  <section class="filters" aria-label="Search and filters">
+  <section class="filters" aria-label="<%= t('courses.filters') %>" data-i18n-aria-label="courses.filters">
     <form class="filters__search" action="./courses.html" method="get" role="search">
-      <label class="visually-hidden" for="search">Search courses</label>
-      <input class="input" id="search" name="search" type="search" placeholder="Search courses...">
-      <button class="filters__submit visually-hidden" type="submit">Search</button>
+      <label class="visually-hidden" for="search" data-i18n="courses.search"><%= t('courses.search') %></label>
+      <input class="input" id="search" name="search" type="search" placeholder="<%= t('courses.searchPlaceholder') %>" data-i18n-placeholder="courses.searchPlaceholder">
+      <button class="filters__submit visually-hidden" type="submit" data-i18n="btn.search"><%= t('btn.search') %></button>
     </form>
-    <ul class="chips" aria-label="Categories">
+    <ul class="chips" aria-label="<%= t('courses.categories') %>" data-i18n-aria-label="courses.categories">
       <% categories.forEach(function (c, i) { %>
-      <li class="chips__item"><button class="chip<%= i === 0 ? ' chip--active' : '' %>" type="button"<%- i === 0 ? ' aria-pressed="true"' : ' aria-pressed="false"' %>><%= c %></button></li>
+      <li class="chips__item"><button class="chip<%= i === 0 ? ' chip--active' : '' %>" type="button" aria-pressed="<%= i === 0 ? 'true' : 'false' %>" data-i18n="cat.<%= c %>"><%= t('cat.' + c) %></button></li>
       <% }); %>
     </ul>
   </section>
 
-  <section class="cards" aria-label="Course list">
+  <section class="cards" aria-label="<%= t('courses.list') %>" data-i18n-aria-label="courses.list">
     <% courses.forEach(function (course) { %>
     <%- include('src/partials/course-card', { course: course }) %>
     <% }); %>

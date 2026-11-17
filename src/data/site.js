@@ -1,39 +1,35 @@
 export const site = {
   name: "Codeline",
   nav: [
-    { href: "./index.html", label: "Home", key: "home" },
-    { href: "./courses.html", label: "Courses", key: "courses" },
-    { href: "./enrollment.html", label: "Enrollment", key: "enrollment" }
-  ]
+    { href: "./index.html", key: "home" },
+    { href: "./courses.html", key: "courses" },
+    { href: "./enrollment.html", key: "enrollment" }
+  ],
+  languages: ["en", "uk"]
 };
 
-export const categories = ["All", "Programming", "Web", "Data", "DevOps"];
+export const categories = ["all", "programming", "web", "data", "devops"];
 
 export const courses = [
-  { category: "Programming", title: "Python for Beginners", level: "Beginner", weeks: 8, price: 49 },
-  { category: "Web", title: "JavaScript Essentials", level: "Beginner", weeks: 10, price: 59 },
-  { category: "Web", title: "React from Scratch", level: "Intermediate", weeks: 12, price: 89 },
-  { category: "Data", title: "SQL and Databases", level: "Beginner", weeks: 6, price: 45 },
-  { category: "DevOps", title: "Git and GitHub", level: "Beginner", weeks: 4, price: 29 },
-  { category: "DevOps", title: "Docker Basics", level: "Intermediate", weeks: 6, price: 69 }
+  { category: "programming", title: "Python for Beginners", level: "beginner", weeks: 8, price: 49, image: "python" },
+  { category: "web", title: "JavaScript Essentials", level: "beginner", weeks: 10, price: 59, image: "javascript" },
+  { category: "web", title: "React from Scratch", level: "intermediate", weeks: 12, price: 89, image: "react" },
+  { category: "data", title: "SQL and Databases", level: "beginner", weeks: 6, price: 45, image: "sql" },
+  { category: "devops", title: "Git and GitHub", level: "beginner", weeks: 4, price: 29, image: "git" },
+  { category: "devops", title: "Docker Basics", level: "intermediate", weeks: 6, price: 69, image: "docker" }
 ];
 
 export const featured = {
-  category: "Web",
-  title: "React from Scratch",
-  description: "Build modern interfaces with components, state and hooks.",
-  level: "Intermediate",
-  weeks: 12,
+  ...courses[2],
   instructor: "Marcus Lind",
-  price: 89,
-  image: "react",
-  alt: "Abstract code symbols on a blue background",
   modules: [
-    { title: "Components and JSX", weeks: 2 },
-    { title: "State and props", weeks: 3 },
-    { title: "Hooks", weeks: 3 },
-    { title: "Final project", weeks: 4 }
+    { key: "module.1", weeks: 2 },
+    { key: "module.2", weeks: 3 },
+    { key: "module.3", weeks: 3 },
+    { key: "module.4", weeks: 4 }
   ]
 };
+
+export const coverAlt = (course) => "Cover of the " + course.title + " course";
 
 export const priceLabel = (value) => "€" + value;
